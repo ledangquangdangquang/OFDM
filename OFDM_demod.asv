@@ -1,0 +1,42 @@
+clear;
+[yr, fs] = audioread('ofdm_signal.wav');
+fc = 2400;         % carrier frequency (Hz)
+M = 4;
+N = 8;
+K = 4;
+Z = N - K;
+G = 4;
+Df = 2;
+Dt = 2;
+pilot_matrix = [     1     0     1
+    0     0     0
+    1     0     1
+    0     0     0];
+n = 0:length(yr)-1;
+t = n/fs;
+
+xs = sin(2*pi*fc*t);
+xc = cos(2*pi*fc*t);
+Hr1 = xs .* yr';
+Hr2 = xc .* yr';
+
+[b, a] = butter(5, 1/10);
+Gr1 = filter(b, a, Hr1);
+Gr2 = filter(b, a, Hr2);
+Gr = Gr1 + 1j*Gr2;
+Er = Gr(20:20:end);
+Er = reshape(Er, N+G, []);
+Dr = Er(G+1: end,:);
+Cr = fft(Dr);
+Br = Cr;
+mid = N/2;                             % DC index
+Br(mid:mid+Z-2, :) = [];         % remove guard
+Br(1,:) = [];                            % remove DC
+X = pilot_matrix;
+pilot_index = find(X == 1);
+X = auto_depilot(Br, pilot_matrix);
+X(pilot_index)  = [];
+A = qamde1(X, M);
+st_matrix = reshapebit(A, K);
+st_rx = st_matrix(:).';
+disp(st_rx);
