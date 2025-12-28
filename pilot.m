@@ -14,6 +14,8 @@ while true
     B_pilot(:, t+1) = 0;
     t = t + Dt;
 end
+pilot_matrix = B_pilot;
+save('pilot_matrix','pilot_matrix') ;
 % ===== PHẦN MỚI: thay 0 bằng B =====
 z = find(B_pilot == 0);
 B_pilot(z(1:lenB)) = B(:);

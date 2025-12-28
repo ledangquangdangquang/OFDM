@@ -11,8 +11,7 @@ Df = 2;            % Khoảng cách Pilot theo tần số (không gian subcarrie
 Dt = 2;            % Khoảng cách Pilot theo thời gian (không gian symbol)
 
 % Ma trận mẫu Pilot (dùng để ước lượng kênh truyền)
-pilot_matrix = [1 0 1; 0 0 0; 1 0 1; 0 0 0]; 
-
+load('pilot_matrix.mat');
 %% 2. GIẢI ĐIỀU CHẾ SÓNG MANG (DOWN-CONVERSION)
 n = 0:length(yr)-1;
 t = n/fs;
