@@ -24,7 +24,7 @@ Hr1 = xs .* yr';
 Hr2 = xc .* yr';
 
 % Thiết kế bộ lọc thông thấp (Butterworth bậc 5) để loại bỏ thành phần tần số cao
-[b, a] = butter(5, 1/10);
+[b, a] = butter(5, fc/(fs/2)); % Giá trị 1/10 (hay 0.1) có nghĩa là bộ lọc sẽ cho phép các tần số từ 0 đến 10% của tần số Nyquist đi qua, và chặn các tần số cao hơn.
 Gr1 = filter(b, a, Hr1);
 Gr2 = filter(b, a, Hr2);
 Gr = Gr1 + 1j*Gr2; % Tín hiệu phức sau khi lọc
