@@ -1,5 +1,5 @@
 function X_equalized = auto_depilot(Br, pilot_matrix)
-% AUTO_PILOT  Channel estimation & equalization using comb pilot
+% AUTO_DEPILOT  Channel estimation & equalization using comb pilot
 %
 % Br            : ma trận sau FFT (K × Ns), đã bỏ DC & guard
 % pilot_matrix  : ma trận pilot (K × Ns), pilot = 1, data = 0
