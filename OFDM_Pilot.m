@@ -8,8 +8,7 @@ Z = N - K;          % Số subcarriers bảo vệ (Guard carriers) để tránh 
 G = 4;              % Độ dài Cyclic Prefix (CP)
 Df = 2;             % Khoảng cách Pilot theo tần số
 Dt = 2;             % Khoảng cách Pilot theo thời gian
-% st = [1 0 1 1 0 0 1 0 1 1 0 0 0 1 0 1]; % Chuỗi bit dữ liệu đầu vào
-st = [1 0 1 1 0 0 1 0 1 1 0 0 0 1 0 1 1 1 1 1 0 0 0 0];
+st = [1 0 1 1 0 0 1 0 1 1 0 0 0 1 0 1]; % Chuỗi bit dữ liệu đầu vào
 %% ===== 2. ĐIỀU CHẾ VÀ CHÈN PILOT =====
 % Tách chuỗi bit thành ma trận K hàng (mỗi hàng tương ứng 1 kênh dữ liệu)
 A = S2P(st, 1, K); 
@@ -26,6 +25,7 @@ B = pilot(B, K, Df, Dt);
 % đang thử test dữ liệu st dài hơn (thêm 1 sysmbol)
 % mới sửa lại cái pilot để thích ứng với nhiều Df Dt K hơn 
 % có vẻ code chạy được nhưng chưa biết làm sao chắc đúng 
+% thì thêm nhiều bit nên pilot đang lỗi
 %% ===== 3. ÁNH XẠ SUB-CARRIERS (RESOURCES MAPPING) =====
 % Tạo cấu trúc khung OFDM trong miền tần số
 zero = zeros(1, size(B,2));
